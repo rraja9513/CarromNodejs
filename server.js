@@ -31,8 +31,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 const adminRouter=require('./routes/admin');
 const userRouter=require('./routes/users');
+const paymentRouter=require('./routes/payments');
 app.use('/admin',adminRouter);
 app.use('/users',userRouter);
+app.use('/payments',paymentRouter);
 app.listen(port,function(){
     console.log("Server started Successfully");
 });
