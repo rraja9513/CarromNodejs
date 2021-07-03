@@ -59,7 +59,7 @@ router.route('/login').post((req, res, next)=> {
         });
       },
       function(token, user, done) {
-         var smtpTransport = nodemailer.createTransport({
+         var smtpTransport = nodemailer.createTransport('SMTP',{
           service: 'Gmail',
           auth: {
             user: 'rraja9513@gmail.com',
@@ -104,7 +104,7 @@ router.route('/login').post((req, res, next)=> {
         });
       },
       function(user, done) {
-        var smtpTransport = nodemailer.createTransport({
+        var smtpTransport = nodemailer.createTransport('SMTP',{
           service: 'Gmail',
           auth: {
             user: 'rraja9513@gmail.com',
