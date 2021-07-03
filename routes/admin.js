@@ -59,7 +59,7 @@ router.route('/login').post((req, res, next)=> {
         });
       },
       function(token, user, done) {
-         var smtpTransport = nodemailer.createTransport("SMTP",{
+         var smtpTransport = nodemailer.createTransport({
           service: 'Gmail',
           auth: {
             user: process.env.GMAIL_ID,
@@ -104,7 +104,7 @@ router.route('/login').post((req, res, next)=> {
         });
       },
       function(user, done) {
-        var smtpTransport = nodemailer.createTransport("SMTP",{
+        var smtpTransport = nodemailer.createTransport({
           service: 'Gmail',
           auth: {
             user: process.env.GMAIL_ID,
