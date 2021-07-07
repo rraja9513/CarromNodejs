@@ -62,9 +62,11 @@ passport.use(new LocalStrategy(function(username, password, done) {
 const userRouter=require('./routes/users');
 const paymentRouter=require('./routes/payments');
 const adminRouter=require('./routes/admin');
+const tournamentRouter=require('./routes/tournaments');
 app.use('/admin',adminRouter);
 app.use('/users',userRouter);
 app.use('/payments',paymentRouter);
+app.use('/tournaments',tournamentRouter);
 app.listen(port,function(){
     console.log("Server started Successfully");
 });

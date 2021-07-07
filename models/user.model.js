@@ -18,12 +18,16 @@ const userSchema=new Schema(
         phonenumber:{
             type:String,
             required: true,
-        } 
+        },
+        created:{
+            type:String
+        }
     },
     {
         timestamps:true,
     }
 );
+userSchema.index({name:"text"});
 userSchema.plugin(passportLocalMongoose,{usernameField: 'email'});
 const User=mongoose.model('User',userSchema);
 module.exports=User;

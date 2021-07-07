@@ -1,4 +1,5 @@
 const router=require('express').Router();
+const moment = require('moment');
 const passport=require('passport');
 let User=require('../models/user.model');
 router.route('/').post((req, res) => {
@@ -6,18 +7,22 @@ router.route('/').post((req, res) => {
       .then(users => res.json(users))
       .catch(err => res.status(400).json('Error: ' + err));
   });
+  router.route('/time').post((req, res) => {
+   res.json(year + "-" + month + "-" + date + "-" + hours + ":" + minutes + ":" + seconds);
+  });
   router.route('/:id').get((req, res) => {
     User.findById(req.params.id)
       .then(users => res.json(users))
       .catch(err => res.status(400).json('Error: ' + err));
   });
   router.route('/search').post((req, res) => {
-    User.find({name : req.body.name})
+    User.find({ $text: { $search: req.body.name } })
       .then(users => res.json(users))
       .catch(err => res.status(400).json('Error: ' + err));
   });
 router.route('/signup').post((req,res)=>{
-    const Users=new User({ name : req.body.name,email:req.body.email,gender:req.body.gender,phonenumber:req.body.phonenumber});   
+  let a=moment().format('YYYY-MM-DD:hh:mm:ss')
+    const Users=new User({ name : req.body.name,email:req.body.email,gender:req.body.gender,phonenumber:req.body.phonenumber,created:a});   
         User.register(Users,req.body.password,function(err,user){
             if(err)
             {
@@ -29,7 +34,9 @@ router.route('/signup').post((req,res)=>{
                 passport.authenticate("userLocal")(req,res,function(){
                     if (req.user) {
                         var redir = { returnCode: "Success",
-                                      returnMsg:"User registered Successfully"};
+                                      returnMsg:"User registered Successfully",
+                                      uname:user.name
+                                    };
                         return res.json(redir);
                   } else {
                     res.status(400).json({ message: 'SignupFailed' });
