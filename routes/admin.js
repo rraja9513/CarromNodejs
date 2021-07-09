@@ -26,6 +26,7 @@ router.route('/login').post((req, res, next)=> {
     var user = new Admin({
         username: req.body.username,
         email: req.body.email,
+        phonenumber:req.body.phonenumber,
         password: req.body.password
       });
   
