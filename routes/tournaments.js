@@ -6,20 +6,23 @@ router.route('/').post((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
   router.route('/add').post((req,res)=>{
-    const time = req.body.time;
-    const date=req.body.date;
-    const winningamount = req.body.winningamount;
+    const dateandtime = req.body.dateandtime;
+    const entryfee = req.body.entryfee;
     const numberofwinners=req.body.numberofwinners;
-    const percentage=req.body.percentage
+    const winningamount=req.body.winningamount 
     const newTournament=new Tournament({
-      time,
-      date,
-      winningamount,
-      numberofwinners,
-      percentage
+     dateandtime,
+     entryfee,
+     numberofwinners,
+     winningamount
     })
     newTournament.save()
   .then(() => res.json('Tournament added!'))
   .catch(err => res.status(400).json('Error: ' + err));
+});
+router.route('/:id').delete((req, res) => {
+  Tournament.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Tournament deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
  module.exports=router;
