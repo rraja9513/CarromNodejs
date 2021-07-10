@@ -6,7 +6,10 @@ router.route('/').post((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
   router.route('/add').post((req,res)=>{
-    const dateandtime = req.body.dateandtime;
+    const dateandtime = {
+      startdate=req.body.startdate,
+      enddate=req.body.enddate
+    }
     const entryfee = req.body.entryfee;
     const numberofwinners=req.body.numberofwinners;
     const winningamount=req.body.winningamount;
