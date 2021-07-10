@@ -7,8 +7,8 @@ router.route('/').post((req, res) => {
   });
   router.route('/add').post((req,res)=>{
     const dateandtime = {
-      startdate=req.body.startdate,
-      enddate=req.body.enddate
+      startdate:req.body.startdate,
+      enddate:req.body.enddate
     }
     const entryfee = req.body.entryfee;
     const numberofwinners=req.body.numberofwinners;
