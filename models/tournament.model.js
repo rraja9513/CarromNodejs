@@ -3,8 +3,8 @@ const Schema=mongoose.Schema;
 const tournamentSchema=new Schema(
     {
       dateandtime:{
-          startdate:{type:String},
-          enddate:{type:String}
+          startdate:{type:Date},
+          enddate:{type:Date}
       },
       entryfee:{
           type:String
