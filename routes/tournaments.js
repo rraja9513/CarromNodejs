@@ -9,12 +9,14 @@ router.route('/').post((req, res) => {
     const dateandtime = req.body.dateandtime;
     const entryfee = req.body.entryfee;
     const numberofwinners=req.body.numberofwinners;
-    const winningamount=req.body.winningamount 
+    const winningamount=req.body.winningamount;
+    const percentage=req.body.percentage; 
     const newTournament=new Tournament({
      dateandtime,
      entryfee,
      numberofwinners,
-     winningamount
+     winningamount,
+     percentage
     })
     newTournament.save()
   .then(() => res.json('Tournament added!'))

@@ -16,7 +16,10 @@ const tournamentSchema=new Schema(
           {
               type:String
           }
-      ]
+      ],
+      percentage:{
+          type:String
+      }
     },
     {
         timestamps:true,
@@ -24,8 +27,8 @@ const tournamentSchema=new Schema(
 );
 tournamentSchema.path('winningamount').validate(function (value) {
     console.log(value.length)
-    if (value.length > 1000 ){
-      throw new Error("Assigned person's size can't be greater than 1000!");
+    if (value.length > 10 ){
+      throw new Error("Winners List Size Can't Be Greater Than 10!");
     }
   });
   
