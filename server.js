@@ -10,6 +10,7 @@ var favicon = require('static-favicon');
 var LocalStrategy = require('passport-local').Strategy;
 const User =require('./models/user.model');
 const Admin =require('./models/admin.model');
+const Userprofile=require('./models/userprofile.model');
 require('dotenv').config();
 const app=express();
 app.use(cors());
@@ -37,6 +38,9 @@ connection.once('open',()=>{
 passport.use('userLocal',User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+passport.use('userprofileLocal',Userprofile.createStrategy());
+passport.serializeUser(Userprofile.serializeUser());
+passport.deserializeUser(Userprofile.deserializeUser());
 passport.use(new LocalStrategy(function(username, password, done) {
     Admin.findOne({ username: username }, function(err, user) {
       if (err) return done(err);
@@ -63,10 +67,14 @@ const userRouter=require('./routes/users');
 const paymentRouter=require('./routes/payments');
 const adminRouter=require('./routes/admin');
 const tournamentRouter=require('./routes/tournaments');
+const userprofileRouter=require('./routes/userprofile');
+const kycRouter=require('./routes/kyc');
 app.use('/admin',adminRouter);
 app.use('/users',userRouter);
 app.use('/payments',paymentRouter);
 app.use('/tournaments',tournamentRouter);
+app.use('/userprofile',userprofileRouter);
+app.use('/kyc',kycRouter)
 app.listen(port,function(){
     console.log("Server started Successfully");
 });
